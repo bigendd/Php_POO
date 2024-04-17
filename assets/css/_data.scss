@@ -1,0 +1,170 @@
+// colors
+$black: rgb(13, 27, 42);
+$navy: rgb(27, 38, 59);
+$blue: rgb(65, 90, 119);
+$lightBlue: rgb(119, 141, 169);
+$white: rgb(224, 225, 221);
+$red: rgb(158,0,49);
+$orange: rgb(211, 97, 53);
+$green:rgb(77, 170, 87);
+//fonts
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Quicksand:wght@300..700&display=swap');
+$font: "Quicksand", sans-serif;
+$title: "Oswald", sans-serif;
+
+@mixin flexbox($jc, $ai, $fd:false, $fw:false, $fg:false) {
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+    @if $fd {
+        flex-direction: $fd;
+    }
+    @if $fw {
+        flex-wrap: $fw;
+    }
+    @if $fg {
+        flex-grow: $fg;
+    }
+}
+// Initialisation 
+* {
+    box-sizing: border-box;
+    margin:0;
+}
+
+// Customisation checkbox
+.toggler-wrapper {
+	display: block;
+	width: 45px;
+	height: 25px;
+	cursor: pointer;
+	position: relative;
+	input{
+		&[type="checkbox"] {
+			display: none;
+			&:checked {
+				&+.toggler-slider {
+					background-color: $red;
+					.toggler-knob {
+						left: calc(100% - 19px - 3px);
+					}
+				}
+			}
+		}	
+	}
+	.toggler-slider {
+		background-color: #ccc;
+		position: absolute;
+		border-radius: 100px;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		-webkit-transition: all 300ms ease;
+		transition: all 300ms ease;
+        width:55px;
+		&:after {
+			position: absolute;
+			top: 50%;
+			left: calc(100% + 5px);
+			-webkit-transform: translateY(-50%);
+			transform: translateY(-50%);
+			font-size: 75%;
+			text-transform: uppercase;
+			font-weight: 500;
+			opacity: 0.7;
+            min-width:150px;
+
+		}
+	}
+	.toggler-knob {
+		position: absolute;
+		-webkit-transition: all 300ms ease;
+		transition: all 300ms ease;
+		width: calc(25px - 6px);
+		height: calc(25px - 6px);
+		border-radius: 50%;
+		left: 3px;
+		top: 3px;
+		background-color: #fff;
+	}
+	&.banned {
+		input{
+			&[type="checkbox"] {
+				&:checked {
+					&+.toggler-slider {
+						&:after {
+							content:'Banni';
+							width:150px;
+						}
+					}
+				}
+			}	
+		}
+		.toggler-slider {
+			&:after {
+				content: 'Pas banni';
+			}
+		}
+	}
+	&.email-blocked {
+		input{
+			&[type="checkbox"] {
+				&:checked {
+					&+.toggler-slider {
+						&:after {
+							content:'Email bloqué';
+							width:150px;
+						}
+					}
+				}
+			}	
+		}
+		.toggler-slider {
+			&:after {
+				content: 'Email ok';
+				width:170px;
+			}
+		}
+	}
+
+}
+
+// Balises
+body {
+    font-family: $font;
+    font-size:1rem;
+    padding-top: 100px;
+}
+h1 {
+    font-family: $title;
+    font-weight:200;
+    text-transform: uppercase;
+}
+button {
+    font-family:$title;
+    font-weight:200;
+    font-size:1.2rem;
+    border:none;
+    text-transform: uppercase;
+    margin: .5rem .5rem .5rem 0;
+    background: rgba($orange, .7);
+    color:white;
+    transition: .5s;
+    border-radius:3px;
+    cursor:pointer;
+    &:hover {
+        background: rgba($orange, 1);
+    }
+}
+fieldset {
+    border-radius:1rem;
+    border:1px solid rgba($lightBlue, .5);
+    legend {
+        padding:5px 1rem;
+        border-radius:2rem;
+        border:1px solid #ccc;
+        text-align: center;;
+    }
+}
+
